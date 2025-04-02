@@ -111,7 +111,7 @@
     <h1>Votre tour n'est pas encore terminé. Attendez quelques secondes de plus !</h1>
     <a class="button" href="https://t.me/viratcash_bot" target="_blank">✉️ Écrire à Virat</a>
     <a class="button" href="https://affpa.top/L?tag=d_3712661m_97c_&site=3712661&ad=97&r=registration" target="_blank">🎮 Jouer à Aviator</a>
-    <button class="button button-green" onclick="getSignal()">✅ Obtenez le signal</button>
+    <button id="signal-btn" class="button button-green" onclick="getSignal()">✅ Obtenez le signal</button>
     <div id="signal-display"></div>
   </div>
 
@@ -137,28 +137,28 @@
 
   <div class="section">
     <div class="comment">
-      <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="avatar">
+      <img src="/mnt/data/A_digital_photograph_compilation_features_four_Cam.png" alt="avatar">
       <div class="comment-info">
         <span>Armand Ngu</span>
         <span>Merci Virat, maintenant je n'ai plus de soucis financiers</span>
       </div>
     </div>
     <div class="comment">
-      <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="avatar">
+      <img src="/mnt/data/A_digital_photograph_compilation_features_four_Cam.png" alt="avatar">
       <div class="comment-info">
         <span>Jean Fokam</span>
         <span>Au début, je ne croyais pas Virat, maintenant je gagne des millions !</span>
       </div>
     </div>
     <div class="comment">
-      <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="avatar">
+      <img src="/mnt/data/A_digital_photograph_compilation_features_four_Cam.png" alt="avatar">
       <div class="comment-info">
         <span>Claudine Tchoupo</span>
         <span>Je vis maintenant librement, merci Virat !</span>
       </div>
     </div>
     <div class="comment">
-      <img src="https://randomuser.me/api/portraits/men/4.jpg" alt="avatar">
+      <img src="/mnt/data/A_digital_photograph_compilation_features_four_Cam.png" alt="avatar">
       <div class="comment-info">
         <span>Lucas Beya</span>
         <span>La vie que vous m'avez montrée n'est pas pour moi. Je vais changer !</span>
@@ -172,6 +172,7 @@
     function getSignal() {
       const display = document.getElementById('signal-display');
       const idSection = document.getElementById('id-input-section');
+      const signalBtn = document.getElementById('signal-btn');
 
       if (signalActive) {
         display.textContent = '🎯 Le jeu est en cours, veuillez patienter...';
@@ -179,6 +180,7 @@
       }
 
       signalActive = true;
+      signalBtn.disabled = true; // Désactive le bouton de signal pendant l'attente de l'ID
 
       // Générer le multiplicateur basé sur des probabilités
       const rand = Math.random();
@@ -192,11 +194,9 @@
       }
 
       display.textContent = `🚀 Nouveau signal prêt: ×${multiplier}`;
-      idSection.style.display = 'block';
+      idSection.style.display = 'block'; // Afficher le champ pour l'ID
 
-      setTimeout(() => {
-        signalActive = false;
-      }, 9000);
+      // L'utilisateur ne peut plus recevoir de signaux tant que l'ID n'est pas saisi
     }
 
     function handleIdSubmit() {
@@ -207,6 +207,7 @@
       if (id.trim() !== '') {
         warning.textContent = '📉 Votre solde 1XBET est inférieur à 1400 XAF. Veuillez ajouter des fonds à votre compte !';
         depositBtn.style.display = 'inline-block';
+        document.getElementById('signal-btn').disabled = true; // Désactive définitivement le bouton de signal après que l'ID soit saisi
       }
     }
   </script>
